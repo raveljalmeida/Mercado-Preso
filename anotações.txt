@@ -1,0 +1,11 @@
+Rotas públicas:
+    - /sigup ok
+    - /login ok
+
+Rotas privadas:
+    - /products:
+        - Cadastrar (POST) ok
+        - Buscar (GET) 
+        - Modificar (PUT)
+        - Apagar (DELETE)
+    - /logout ok

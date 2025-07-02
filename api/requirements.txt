@@ -1,0 +1,7 @@
+fastapi[standard]
+python-multipart
+passlib[bcrypt]
+pydantic
+pyjwt
+mysql-connector-python
+email-validator

@@ -1,0 +1,34 @@
+services:
+  db:
+    image: mysql
+    container_name: db-users
+    environment:
+      MYSQL_ROOT_PASSWORD: "1234"
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql_data
+    networks:
+      - connect-server-db
+    command: --port=3306
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    
+  api:
+    build: ./api
+    networks:
+      - connect-server-db
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  mysql_data:
+
+networks:
+  connect-server-db:
