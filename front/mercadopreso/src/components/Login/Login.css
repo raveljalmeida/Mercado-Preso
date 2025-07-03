@@ -1,0 +1,76 @@
+#login {
+    /* background-color: gray; */
+    width: 68%;
+    height: 60%;
+    float: right;
+    margin-top: 4rem;
+    display: flex;
+    justify-content: space-between;
+
+    #txtLogin {
+        font-size: 32px;
+        line-height: 40px;
+        font-weight: 600;
+        width: 48%;
+    }
+
+    form {
+        /* background-color: red; */
+        width: 50%;
+        display: flex;
+        height: 90%;
+        flex-direction: column;
+        justify-content: center;
+        padding: 2rem;
+        border: 1px solid #E5E5E5;
+        border-radius: 6px;
+
+        label {
+            margin-top: 1rem;
+            margin-bottom: 0.2rem;
+            font-size: 14px;
+            margin-left: 0.5rem;
+        }
+
+        input {
+            border-radius: .375em;
+            font-size: 16px;
+            height: 3rem;
+            line-height: 22px;
+            margin: 0;
+            padding: .8125em .75em;
+            border: 1px solid #BFBFBF;
+        }
+
+        input:focus {
+            border: none;
+            outline: 2px solid #3483FA;
+        }
+
+        button {
+            margin-top: 2rem;
+            padding: 1rem;
+            border-radius: .375em;
+            border: none;
+            background-color: #3483FA;
+            font-size: 16px;
+            color: white;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        #createCount {
+            margin-top: 0.5rem;
+            background-color: white;
+            color: #3493FB;
+        }
+
+        button:hover {
+            background-color: #2968C8;
+        }
+
+        #createCount:hover {
+            background-color: #ECF3FC;
+        }
+    }
+}
