@@ -43,7 +43,7 @@
         }
 
         input:focus {
-            border: none;
+            border-color: white;
             outline: 2px solid #3483FA;
         }
 

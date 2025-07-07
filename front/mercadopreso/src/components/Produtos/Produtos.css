@@ -1,0 +1,21 @@
+#banner-container {
+    background: linear-gradient(180deg,rgba(255, 248, 1, 1) 15%, rgba(255, 250, 72, 1) 30%, #EBEBEB 78%);
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#banner {
+    width: 50%;
+    
+}
+
+#cards-container {
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    /* background-color: red; */
+    padding: 1rem;
+    
+}

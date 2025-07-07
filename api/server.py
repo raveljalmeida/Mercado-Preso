@@ -1,14 +1,27 @@
 
 from datetime import datetime, timedelta, timezone
-
 import mysql.connector
-from fastapi import FastAPI, Response, Cookie
+from fastapi import FastAPI, Response, Cookie, status
 from fastapi.responses import RedirectResponse
+from fastapi.middleware.cors import CORSMiddleware
 from passlib.context import CryptContext
 from pydantic import BaseModel
 import jwt 
-
 from email_validator import validate_email, EmailNotValidError
+
+app = FastAPI()
+
+origins = [
+    "http://localhost:5173"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 conexao = mysql.connector.connect(
@@ -20,8 +33,6 @@ conexao = mysql.connector.connect(
 )
 
 cursor = conexao.cursor()
-
-app = FastAPI()
 
 SECRET_KEY = "17f33db1d7adfa657356d9fb0e1e639e86ceb90e12277362b99f80657e279bbc"
 ALGORITHM = "HS256"
@@ -85,10 +96,13 @@ async def login(userLogin: UserLogin, response: Response):
         if pwd_context.verify(userLogin.senha, senha) is True:
             token = create_access_token(data={"sub": userLogin.email})
             response.set_cookie(key="acess_token", value=token, httponly=True, secure=True)
+            response.status_code = status.HTTP_200_OK
             return {"message": "Login efetuado com sucesso"}
         else:
+            response.status_code = status.HTTP_401_UNAUTHORIZED
             return {"message": "Usuário ou senha incorretos"}
     except:
+        response.status_code = status.HTTP_401_UNAUTHORIZED
         return {"message": "Usuário ou senha incorretos"}
     
 
@@ -112,7 +126,7 @@ async def products(product: Product, acess_token: str = Cookie(default=None)):
     
 
 @app.get("/products")
-async def getProucts(acess_token: str = Cookie(default=None)):
+async def getProucts():
     """ try:
         jwt.decode(acess_token, SECRET_KEY, algorithms=[ALGORITHM])
     except:
@@ -120,14 +134,15 @@ async def getProucts(acess_token: str = Cookie(default=None)):
     try:
         produtos = []
         produto = {}
-        cursor.execute('SELECT nomeProduto, descricao, preco, imgLink FROM users.Produtos')
+        cursor.execute('SELECT idProduto, nomeProduto, descricao, preco, imgLink FROM users.Produtos')
         consulta = cursor.fetchall()
         for prod in consulta:
             produto = {
-                "nome": prod[0],
-                "descrição": prod[1],
-                "preço": prod[2],
-                "imagem": prod[3]
+                "id": prod[0],
+                "nome": prod[1],
+                "descrição": prod[2],
+                "preço": prod[3],
+                "imagem": prod[4]
             }
             produtos.append(produto)
         return produtos
@@ -179,3 +194,11 @@ async def logout(response: Response, acess_token: str = Cookie(default=None)):
         return {"message": "Sessão encerrada"}
     except:
         return {"message": "Sem permissão"}
+    
+@app.get("/verify")
+async def verify(acess_token: str = Cookie(default=None)):
+    try:
+        jwt.decode(acess_token, SECRET_KEY, algorithms=[ALGORITHM])
+        return True
+    except:
+        return False
