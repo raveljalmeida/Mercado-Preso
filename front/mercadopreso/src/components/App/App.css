@@ -5,3 +5,11 @@
     flex-direction: column;
     align-items: center;
 }
+
+#logout {
+    position: absolute;
+    top: 3.25rem;
+    right: 0rem;
+    text-decoration: none;
+    color: black;
+}
