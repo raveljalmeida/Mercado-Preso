@@ -52,10 +52,10 @@ export default function Login({loginControle}){
                     <label htmlFor="senha">Senha</label>
                     <input type="password" className='senha' required {...register('senha')}/>
                     <button type='submit'>Continuar</button>
-                    <button type='button' id='createCount'>Criar conta</button>
-                    <ToastContainer />
+                    <button type='button' id='createCount' onClick={() => navigate('/signup')}>Criar conta</button>
                 </form>
             </section>
+            <ToastContainer />
         </>
     )
 

@@ -79,12 +79,10 @@ async def createUser(user: User, response: Response):
     try:
         cursor.execute(f'INSERT INTO Usuarios (nomeUsuario, email, senha) VALUES ("{user.nome}", "{user.email}", "{pwdHashing}")')
         conexao.commit()
-        token = create_access_token(data={"sub": user.nome})
-        response.set_cookie(key="acess_token", value=token, httponly=True, secure=True)
-        response = RedirectResponse(url="/products", status_code=303)
-        return response
+        return {"message": "Usuário cadastrado"}
     except mysql.connector.Error as err:
         if err.errno == 1062:
+            response.status_code = status.HTTP_409_CONFLICT
             return {"message": f"O email {user.email} já está cadastrado"}
 
 
@@ -195,6 +193,7 @@ async def logout(response: Response, acess_token: str = Cookie(default=None)):
     except:
         return {"message": "Sem permissão"}
     
+
 @app.get("/verify")
 async def verify(acess_token: str = Cookie(default=None)):
     try:

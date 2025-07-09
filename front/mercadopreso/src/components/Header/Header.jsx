@@ -19,7 +19,7 @@ export default function Header({ loginCtrl, setLogin }) {
           {!loginCtrl ? (
             <>
               <Link to="/login" >Entrar</Link>
-              <Link to="/criar-conta">Crie a sua conta</Link>
+              <Link to="/signup">Crie a sua conta</Link>
             </>
           ) : (
             <span></span>

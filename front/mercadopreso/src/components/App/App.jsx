@@ -12,6 +12,7 @@ import Login from '../Login/Login';
 import Produtos from '../Produtos/Produtos';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import Signup from '../Signup/Signup';
 
 export default function App() {
   const [loginCtrl, setLoginCtrl] = useState(false);
@@ -86,6 +87,16 @@ function AppContent({ loginCtrl, setLoginCtrl }) {
               <Navigate to="/products" replace />
             ) : (
               <Login loginControle={() => setLoginCtrl(true)} />
+            )
+          }
+        />
+        <Route 
+          path='/signup'
+          element={
+            loginCtrl ? (
+              <Navigate to='/products' replace />
+            ): (
+              <Signup />
             )
           }
         />
