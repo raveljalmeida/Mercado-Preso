@@ -45,7 +45,10 @@ export default function Produto({id, nome, preco, desc, image, btnCtrl, deleting
                     preco = {preco}
                     desc = {desc}
                     image = {image}
-                    refresh={() => deleting()}
+                    refresh={() => {
+                        deleting();
+                        setMostraEdit(false);
+                    }}
                 />
             </div>
             <ToastContainer />
