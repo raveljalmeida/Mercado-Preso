@@ -1,9 +1,10 @@
 import './Produto.css';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
+import EditProduto from '../EditProduto/EditProduto';
 
-export default function Produto({id, nome, preco, image, btnCtrl, deleting}) {
+export default function Produto({id, nome, preco, desc, image, btnCtrl, deleting}) {
 
     const [mostrarEdit, setMostraEdit] = useState(false);
 
@@ -34,9 +35,18 @@ export default function Produto({id, nome, preco, image, btnCtrl, deleting}) {
                       <button id='btnDelete' onClick={() => delet()}>Exluir</button>
                       <button id='btnEdit' onClick={() => setMostraEdit(true)}>Editar</button>
                     </div>:
-                    
                     <span></span>
                 }
+                <EditProduto 
+                    isOpen={mostrarEdit}
+                    onClose={() => setMostraEdit(false)}
+                    id = {id}
+                    nome = {nome}
+                    preco = {preco}
+                    desc = {desc}
+                    image = {image}
+                    refresh={() => deleting()}
+                />
             </div>
             <ToastContainer />
         </>

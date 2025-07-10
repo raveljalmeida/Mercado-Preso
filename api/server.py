@@ -28,7 +28,7 @@ conexao = mysql.connector.connect(
     host = 'db-users',
     user = 'root',
     password = '1234',
-    database = 'users',
+    database = 'mercado_preso',
     port = '3306'
 )
 
@@ -89,7 +89,7 @@ async def createUser(user: User, response: Response):
 @app.post("/login")
 async def login(userLogin: UserLogin, response: Response):
     try:
-        cursor.execute(f"Select senha FROM users.Usuarios where email='{userLogin.email}'")
+        cursor.execute(f"Select senha FROM mercado_preso.Usuarios where email='{userLogin.email}'")
         senha = cursor.fetchall()[0][0]
         if pwd_context.verify(userLogin.senha, senha) is True:
             token = create_access_token(data={"sub": userLogin.email})
@@ -132,7 +132,7 @@ async def getProucts():
     try:
         produtos = []
         produto = {}
-        cursor.execute('SELECT idProduto, nomeProduto, descricao, preco, imgLink FROM users.Produtos')
+        cursor.execute('SELECT idProduto, nomeProduto, descricao, preco, imgLink FROM mercado_preso.Produtos')
         consulta = cursor.fetchall()
         for prod in consulta:
             produto = {
@@ -173,7 +173,7 @@ async def editProduct(product: Product, id, acess_token: str = Cookie(default=No
     except:
         return {"message": "Sem permissão"}
     try:
-        cursor.execute(f'SELECT idProduto FROM users.Produtos WHERE idProduto={int(id)}')
+        cursor.execute(f'SELECT idProduto FROM mercado_preso.Produtos WHERE idProduto={int(id)}')
         consulta = cursor.fetchall()
         if not consulta:
             return{"message": "Não existe produto com o id informado"}

@@ -40,6 +40,7 @@ export default function MeusProdutos() {
                             id = {produto.id}
                             nome = {produto.nome}
                             preco = {produto.preço}
+                            desc = {produto.descrição}
                             image = {produto.imagem}
                             btnCtrl = {true}
                             deleting = {() => setRefresh(!refresh)}
