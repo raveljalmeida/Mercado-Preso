@@ -105,7 +105,7 @@ async def login(userLogin: UserLogin, response: Response):
     
 
 @app.post("/products")
-async def products(product: Product, acess_token: str = Cookie(default=None)):
+async def products(product: Product, response: Response, acess_token: str = Cookie(default=None)):
     if not product.nome or not product.desc or not product.preco or not product.img:
         return {"message": "Todos os campos devem ser preenchidos"}
     try:
@@ -149,16 +149,18 @@ async def getProucts():
     
 
 @app.delete("/products/{id}")    
-async def deleteProducts(id, acess_token: str = Cookie(default=None)):
+async def deleteProducts(id, response: Response, acess_token: str = Cookie(default=None)):
     try:
         jwt.decode(acess_token, SECRET_KEY, algorithms=[ALGORITHM])
     except:
+        response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
         return {"message": "Sem permissão"}
     try:
         cursor.execute(f'DELETE FROM Produtos WHERE idProduto={int(id)}')
         conexao.commit()
         return {"message": "produto deletado com sucesso"}
     except mysql.connector.Error as err:
+        response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
         return {"message": "erro ao deletar produto",
                 "error": err
                 }

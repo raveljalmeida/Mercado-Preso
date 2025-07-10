@@ -36,4 +36,27 @@
         line-height: 1.4em; 
         margin-bottom: 1rem;
     }
+
+    #btnContainer {
+        width: 100%;
+        margin: 0.5rem 0;
+        display: flex;
+        justify-content: space-between;
+
+        button {
+            width: 40%;
+            margin: 0 1rem;
+            border: none;
+            padding: 0.1rem;
+            color: white;
+        }
+
+        #btnDelete {
+            background-color: red;
+        }
+
+        #btnEdit {
+            background-color: #3483FA;
+        }
+    }
 }

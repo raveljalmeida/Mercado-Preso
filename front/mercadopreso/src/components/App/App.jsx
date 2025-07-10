@@ -13,6 +13,7 @@ import Produtos from '../Produtos/Produtos';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Signup from '../Signup/Signup';
+import MeusProdutos from '../MeusProdutos/MeusProdutos';
 
 export default function App() {
   const [loginCtrl, setLoginCtrl] = useState(false);
@@ -63,9 +64,10 @@ function AppContent({ loginCtrl, setLoginCtrl }) {
       <Header loginCtrl={loginCtrl} setLogin={() => setLoginCtrl(true)} />
 
       {loginCtrl && (
-        <Link id="logout" onClick={logout}>
-          Sair
-        </Link>
+        <nav id='menuLogin'>
+          <Link to='/my-products'>Produtos</Link>
+          <Link id="logout" onClick={logout}>Sair</Link>
+        </nav>
       )}
 
       <Routes>
@@ -97,6 +99,15 @@ function AppContent({ loginCtrl, setLoginCtrl }) {
               <Navigate to='/products' replace />
             ): (
               <Signup />
+            )
+          }
+        /><Route 
+          path='/my-products'
+          element={
+            loginCtrl ? (
+              <MeusProdutos />
+            ): (
+              <Navigate to='/login' replace />
             )
           }
         />

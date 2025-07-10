@@ -10,8 +10,6 @@ export default function Produtos() {
     const [produtosFake, setProdutosFake] = useState([]);
     const [produtosDb, setProdutosDb] = useState([]);
 
-    const navigate = useNavigate();
-
     useEffect(() => {
 
         const fetchDataFakeStore = async () => {
@@ -54,10 +52,12 @@ export default function Produtos() {
 
                     {produtosDb.map(produto => (
                         <Produto 
-                            key = {produto.idProduto}
+                            key = {produto.id}
+                            id = {produto.id}
                             nome = {produto.nome}
                             preco = {produto.preço}
                             image = {produto.imagem}
+                            btnCtrl = {false}
                         />
                     ))}
                 </div>
