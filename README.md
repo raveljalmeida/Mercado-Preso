@@ -29,6 +29,7 @@ A aplicação oferece funcionalidades essenciais de um sistema de vendas:
 - **Estilização:** CSS puro
 - **Bibliotecas:** Axios, React Router DOM, React Hook Form, Toastify
 - **Ambiente de desenvolvimento:** Docker e Docker Compose
+- **Testes de API:** Postman
 
 ---
 
