@@ -67,7 +67,7 @@ Siga os passos abaixo para executar o projeto corretamente em sua máquina local
    - Certifique-se de que os seguintes programas estão instalados:
      - [Docker](https://www.docker.com/)
      - [Node.js](https://nodejs.org/) e [npm](https://www.npmjs.com/)
-   - O projeto foi desenvolvido em ambiente Linux. Recomenda-se utilizar o mesmo sistema operacional ou, se estiver usando Windows, utilize o WSL (Windows Subsystem for Linux) para evitar incompatibilidades.
+   - O projeto foi desenvolvido em ambiente Linux (Ubuntu). Recomenda-se utilizar o mesmo sistema operacional ou, se estiver usando Windows, utilize o WSL (Windows Subsystem for Linux) para evitar incompatibilidades.
 
 2. **Abrir dois terminais**:
    - Um terminal será utilizado para o **backend**.
